@@ -4,4 +4,4 @@ const usersController=require('../controllers/user_controller');
 router.get('/profile',usersController.profile)
 
 
-module.exports=router
+module.exports=router;
