@@ -47,5 +47,6 @@ module.exports.create=function(req,res){
 }
 //get the signin data
 module.exports.createSession=function(req,res){
+    return res.redirect('/')
     
 }
