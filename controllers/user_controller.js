@@ -6,18 +6,25 @@ module.exports.profile=function(req,res){
 }
 //render the signup page
 module.exports.signup=function(req,res){
+    if(req.isAuthenticated()){
+         return res.redirect('/users/profile')
+    }
     return res.render('user_sign_up',{
         title:'connrctRJ signup'
     })
 }
 //render the signin page
 module.exports.signin=function(req,res){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/profile')
+    }
     return res.render('user_sign_in',{
         title:'connrctRJ signin'
     })
 }
 //get the signup data 
 module.exports.create=function(req,res){
+   
     if(req.body.password!=req.body.confirmPassword){
         
         return res.redirect('back');
@@ -47,6 +54,12 @@ module.exports.create=function(req,res){
 }
 //get the signin data
 module.exports.createSession=function(req,res){
+   
+    return res.redirect('/')
+    
+}
+module.exports.signOut=function(req,res){
+    req.logout();
     return res.redirect('/')
     
 }

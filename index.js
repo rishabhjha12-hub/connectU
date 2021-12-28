@@ -9,6 +9,16 @@ const session=require('express-session');
 const passport=require('passport');
 const passportLocal=require('./config/passport_local_strategy')
 const cookieParser=require('cookie-parser');
+const sassMiddleware=require('node-sass-middleware');
+const MongoStore=require('connect-mongo');
+
+app.use(sassMiddleware({
+    src:'./assets/scss',
+    dest:'./assets/css',
+    debug:true,
+    outputStyle:'extended',
+    prefix:'/css'
+}));
 app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(expressLayouts);
@@ -23,11 +33,22 @@ app.set('view engine','ejs')
      resave:false,
      cookie:{
          maxAge:(1000*60*100)
-     }
+     },
+     store: MongoStore.create(
+         {
+         mongoUrl:'mongodb://localhost/connectRJ_development',
+         autoRemove:'disabled'
+         },
+         function(err){
+             console.log("error is ",err);
+         }
+
+     )
 
  }));
  app.use(passport.initialize());
  app.use(passport.session());
+ app.use(passport.setAuthenticatedUser)
 // app.set('views', path.join(__dirname, './views'))
 //exract styles and scripts from the subpages to the layout
 app.set('layout extractStyles',true);

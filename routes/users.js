@@ -2,7 +2,7 @@ const express=require('express');
 const router=express.Router();
 const passport=require('passport');
 const usersController=require('../controllers/user_controller');
-router.get('/profile',usersController.profile)
+router.get('/profile', passport.checkAuthentication, usersController.profile)
 router.get('/sign_up',usersController.signup)
 router.get('/sign_in',usersController.signin)
 router.post('/create',usersController.create)
@@ -10,6 +10,7 @@ router.post('/create',usersController.create)
 router.post('/createSession',passport.authenticate(
     'local',
     {failureRedirect:'/users/sign_in'},
-),usersController.createSession)
+),usersController.createSession);
+router.get('/sign_out',usersController.signOut);
 
 module.exports=router;
