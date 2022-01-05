@@ -1,5 +1,6 @@
-const Post=require('../models/post')
-module.exports.home=function(req,res){
+const Post=require('../models/post');
+const User=require('../models/user');
+module.exports.home= function(req,res){
     // return res.end('<h1>express is running for connectRJ</h1>')
     // Post.find({},function(err,posts){
     //     return res.render('home',{
@@ -19,10 +20,18 @@ module.exports.home=function(req,res){
         path:'user'
     })
     .exec(function(err,posts){
+        // console.log("post",posts)
+        User.find({},function(err,users){
+            console.log('user',users)
             return res.render('home',{
                 title:'connectRJ home',
-                posts:posts
+                posts:posts,
+                all_users:users
             });
+
+        })
+
+          
         })
     
     
