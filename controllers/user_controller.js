@@ -54,6 +54,7 @@ module.exports.create=function(req,res){
                     console.log('error in signing up',err);
                     return;
                 }
+                req.flash('success','signup done')
                 return res.redirect('/users/sign_in');
             })
 
@@ -68,12 +69,19 @@ module.exports.create=function(req,res){
 }
 //get the signin data
 module.exports.createSession=function(req,res){
-   
+   req.flash('success','logged in succesfully!');
     return res.redirect('/')
     
 }
+// module.exports.failure_createSession=function(req,res){
+//     req.flash('err','invalid username/password')
+//     console.log('signin failure')
+//     return res.redirect('back')
+// }
 module.exports.signOut=function(req,res){
+   
     req.logout();
+    req.flash('success','You are logged out!')
     return res.redirect('/')
     
 }

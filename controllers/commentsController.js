@@ -45,6 +45,7 @@ module.exports.create = function (req, res) {
           console.log(comment);
 
           post.comments.push(comment);
+          req.flash('success','comment published');
           post.save();
 
           res.redirect("/");
@@ -60,6 +61,7 @@ module.exports.destroy=function(req,res){
     if(comment.user==req.user.id){
       let postId=comment.post;
       comment.remove();
+      req.flash('success','comment deleted');
       Post.findByIdAndUpdate(postId,{$pull:{comment:req.params.id}},function(err,post){
       
          return res.redirect('back');

@@ -6,7 +6,9 @@ router.get('/profile/:id', passport.checkAuthentication, usersController.profile
 router.post('/update/:id', passport.checkAuthentication, usersController.update);
 
 router.get('/sign_up',usersController.signup)
+// router.get('/failure',usersController.failure_createSession)
 router.get('/sign_in',usersController.signin)
+
 router.post('/create',usersController.create)
 //use passport as a middlware to authenticate
 router.post('/createSession',passport.authenticate(

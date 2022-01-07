@@ -7,29 +7,41 @@ module.exports.create=function(req,res){
     },function(err,post){
         if(err){
             console.log('error',err);
+            req.flash('error',err);
+
             return;
         }
-        console.log(post);
+        req.flash('success','post published');
+
+        // console.log(post);
         return res.redirect('back');
     }); 
 
 }
-module.exports.destroy=function(req,res){
-    Post.findById(req.params.id,function(err,post){
-        if(err){
-            console.log('error',err);
-            return;
-        }
+//we can use both like above code callback method or like below code async await
+module.exports.destroy=async function(req,res){
+    try{
+        const post=await Post.findById(req.params.id);
          //.id means converting  object id it into the string
         if(post.user==req.user.id){
+            req.flash('success','post deleted');
             post.remove();
+            
            
-            Comment.deleteMany({post:req.params.id},function(err){
-               
-                return res.redirect('back');
-            })
-        }else{
-            return res.redirect('back');
+            await Comment.deleteMany({post:req.params.id})
+             return res.redirect('back');
+            
         }
-    });
+
+    }
+    catch(err){
+        console.log('error',err);
+        return;
+    }
+    
+        
+
+
+
+  
 }

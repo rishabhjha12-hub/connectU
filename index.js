@@ -10,7 +10,9 @@ const passport=require('passport');
 const passportLocal=require('./config/passport_local_strategy')
 const cookieParser=require('cookie-parser');
 const sassMiddleware=require('node-sass-middleware');
-const MongoStore=require('connect-mongo');
+const MongoStore=require('connect-mongo')
+const flash=require('connect-flash');
+const customMware=require('./config/middelware')
 
 app.use(sassMiddleware({
     src:'./assets/scss',
@@ -48,7 +50,9 @@ app.set('view engine','ejs')
  }));
  app.use(passport.initialize());
  app.use(passport.session());
- app.use(passport.setAuthenticatedUser)
+ app.use(passport.setAuthenticatedUser);
+ app.use(flash());
+ app.use(customMware.setFlash);
 // app.set('views', path.join(__dirname, './views'))
 //exract styles and scripts from the subpages to the layout
 app.set('layout extractStyles',true);

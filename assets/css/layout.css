@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  /* text-align: center; */
-  background-color: aqua; }
+  background-color: yellow; }
   body #layout-main {
+    height: 100%;
     color: #ff0000; }
