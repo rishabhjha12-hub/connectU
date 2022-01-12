@@ -52,13 +52,13 @@ module.exports.home= async function(req,res){
     //populate the name for the post of user
     try{
         let posts=await Post.find({}).populate('user')
+        .sort('-createdAt')
+        .populate('user')
         .populate({
             path:'comments',
             populate: {
                 path: 'user'
             }
-        }).populate({
-            path:'user'
         })
         let users=await User.find({})
         console.log('user',users)
