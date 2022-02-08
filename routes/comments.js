@@ -4,5 +4,5 @@ const router=express.Router();
 const commentsController=require('../controllers/commentsController');
 console.log("working")
 router.post('/create',passport.checkAuthentication,commentsController.create);
-router.get('/destroy/:id',passport.checkAuthentication,commentsController.destroy)
+router.get('/destroy/:id',passport.checkAuthentication,commentsController.destroy);
 module.exports=router;

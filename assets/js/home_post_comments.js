@@ -1,5 +1,6 @@
 // Let's implement this via classes
 
+
 // this class would be initialized for every post on the page
 // 1. When the page loads
 // 2. Creation of every post dynamically via AJAX
@@ -26,6 +27,7 @@ class PostComments{
         this.newCommentForm.submit(function(e){
             e.preventDefault();
             let self = this;
+            console.log("inside create comment",postId)
 
             $.ajax({
                 type: 'post',
@@ -36,6 +38,7 @@ class PostComments{
                     let newComment = pSelf.newCommentDom(data.data.comment);
                     $(`#post-comments-${postId}`).prepend(newComment);
                     pSelf.deleteComment($(' .delete-comment-button', newComment));
+                    new ToggleLike($(' .toggle-like-button', newComment));
                     $('#comment-area').val("");
 
                     new Noty({
@@ -71,6 +74,13 @@ class PostComments{
             <small>
                 ${comment.user.name}
             </small>
+            <small>
+                            
+            <a class="toggle-like-button" data-likes="0" href="/likes/toggle/?id=${comment._id}&type=Comment">
+                0 Likes
+            </a>
+        
+        </small>
         </p>    
 
 </li>`);
@@ -85,6 +95,7 @@ class PostComments{
                 type: 'get',
                 url: $(deleteLink).prop('href'),
                 success: function(data){
+                    console.log("*****data",data)
                     $(`#comment-${data.data.comment_id}`).remove();
 
                     new Noty({

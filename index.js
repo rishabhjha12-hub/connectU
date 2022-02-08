@@ -1,18 +1,23 @@
 const express=require('express');
 const app=express();
-const port=7000;
+const port=8000;
 const expressLayouts=require('express-ejs-layouts');
 const path =require('path')
 const db=require('./config/mongoose');
 //used for session cookie
 const session=require('express-session');
 const passport=require('passport');
-const passportLocal=require('./config/passport_local_strategy')
+const passportLocal=require('./config/passport_local_strategy');
+const passportJwt=require('./config/passport-jwt-strategy');
+const googlePassport=require('./config/passport-google-oauth-strategy')
 const cookieParser=require('cookie-parser');
 const sassMiddleware=require('node-sass-middleware');
 const MongoStore=require('connect-mongo')
 const flash=require('connect-flash');
 const customMware=require('./config/middelware')
+
+
+
 
 app.use(sassMiddleware({
     src:'./assets/scss',
@@ -25,6 +30,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 app.use(expressLayouts);
 app.use(express.static('./assets'))
+app.use('/uploads',express.static(__dirname+'/uploads'));
 app.set('view engine','ejs')
  app.set('views','./views');
  app.use(session({
