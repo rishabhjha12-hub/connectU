@@ -24,7 +24,7 @@ const userSchema=new mongoose.Schema({
     avatar:{
         type:String
     },
-    friendships: [
+    friends: [
         { 
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Friendship' 

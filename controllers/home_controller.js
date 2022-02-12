@@ -1,6 +1,6 @@
 const Post=require('../models/post');
 const User=require('../models/user');
-
+const Friendship = require('../models/friendship');
 // module.exports.home= function(req,res){
     // return res.end('<h1>express is running for connectRJ</h1>')
     // Post.find({},function(err,posts){
@@ -63,13 +63,25 @@ module.exports.home= async function(req,res){
                 path:'likes'
             }
         }).populate('likes')
-        let users=await User.find({})
-        console.log('user',users)
-            return res.render('home',{
-                title:'connectRJ home',
-                posts:posts,
-                all_users:users
+        let users = await User.find({});
+        let friends = [];
+        if(req.user){
+            friends = await User.findById(req.user.id)
+            .populate({
+                path: "friends",
+                populate: {
+                    path: 'to_user from_user',
+                    select: 'name'
+                }
             });
+        }
+        return res.render('home', {
+            title: "nocial | Home",
+            posts: posts,
+            all_users: users,
+            friends: friends.friends,
+          
+        });
 
     }
     catch(err){
