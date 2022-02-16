@@ -29,7 +29,13 @@ const userSchema=new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Friendship' 
         }
-    ]
+    ],
+    resetToken: {
+        type: String
+    },
+    expireToken: {
+        type: Date
+    }
 
 },{
     timestamps:true

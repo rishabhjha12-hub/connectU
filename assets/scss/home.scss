@@ -5,9 +5,56 @@
         padding: 10px;
     }
     #user-friends{
-        width: 30%;
+        width: 10rem;
         padding: 10px;
         border: 1px solid lightgreen;
         height: 100vh;
+        overflow: scroll;
+    }
+    .friends-container{
+        margin-bottom: 4rem;
+        padding: 6rem;
+        width: 2.9rem;
+        height:4rem;
+        border: 2px solid black;
+        overflow: scroll;
     }
 }
+@media screen and (max-width: 480px) {
+    body {
+      background-color: lightgreen;
+    }
+    #home-container{
+         display: flex;
+        #feed-posts{
+            width: 60%;
+           
+        }
+        #user-friends{
+            width: 40%;
+           
+            border: 1px solid rgb(27, 184, 27);
+         
+            overflow: scroll;
+        }
+        .friends-container{
+            
+         
+            width: 30%;
+             margin: 1rem;
+      
+            border: 2px solid black;
+            padding: 1.2rem;
+         
+            
+        }
+        #user-chat-box{
+            width: 50%;
+            padding: 0;
+            bottom: 52px;
+            right:20px;
+            height: 20rem;
+        }
+    }
+   
+  }
