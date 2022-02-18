@@ -23,7 +23,7 @@ const development={
         secure:false,
         auth:{
             user:'rishabhjha0@gmail.com',
-            pass:''
+            pass:'Asra@2415'
         }
     },
      google_client_id:"1009821999258-ttt1n5405mv4jpjdup5sd8526b456d2d.apps.googleusercontent.com",
