@@ -64,5 +64,4 @@ const production =  {
 
 
 
-//module.exports = eval(process.env.CODIEAL_ENVIORNMENT) == undefined ? development : eval(process.env.CODIEAL_ENVIORNMENT);
-module.exports=development
+module.exports = eval(process.env.CODIEAL_ENVIORNMENT) == undefined ? development : eval(process.env.CODIEAL_ENVIORNMENT);
